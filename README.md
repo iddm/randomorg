@@ -5,7 +5,6 @@
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 
-
 A https://random.org client library. The randomness comes from atmospheric noise, which
 for many purposes is better than the pseudo-random number algorithms typically used in computer
 programs.

@@ -1,5 +1,5 @@
 use chrono;
-use model::ApiKeyStatus;
+use model::{ ApiKeyStatus, Response };
 use date_de;
 
 
@@ -38,7 +38,6 @@ pub struct RandomData<T> {
     #[serde(rename = "completionTime")]
     #[serde(deserialize_with = "date_de::deserialize")]
     pub completion_time: chrono::NaiveDateTime,
-    // pub completion_time: chrono::DateTime<chrono::offset::Utc>,
 }
 
 /// A random.org response with random data.
@@ -81,6 +80,25 @@ pub type GenerateUUIDsResult = RandomResult<String>;
 
 /// A random.org response of `GenerateBlobs` method.
 pub type GenerateBlobsResult = RandomResult<String>;
+
+
+impl From<Response<RandomResult<i32>>> for Vec<i32> {
+    fn from(response: Response<RandomResult<i32>>) -> Vec<i32> {
+        response.result.random.data
+    }
+}
+
+impl From<Response<RandomResult<f32>>> for Vec<f32> {
+    fn from(response: Response<RandomResult<f32>>) -> Vec<f32> {
+        response.result.random.data
+    }
+}
+
+impl From<Response<RandomResult<String>>> for Vec<String> {
+    fn from(response: Response<RandomResult<String>>) -> Vec<String> {
+        response.result.random.data
+    }
+}
 
 
 #[cfg(test)]

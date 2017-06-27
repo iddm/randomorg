@@ -13,6 +13,8 @@
 //!     use randomorg::Random;
 //!     let r = Random::new("API KEY HERE").unwrap();
 //!     println!("Result: {:?}", r.generate_integers(-100, 100, 15, true));
+//!     let random_data = r.request_integers().min(0).max(100).limit(5).collect::<Vec<i32>>();
+//!     println!("Random integers: {:?}", random_data);
 //! }
 //! ```
 
@@ -32,6 +34,7 @@ mod error;
 mod params;
 mod requests;
 mod results;
+mod request_builders;
 pub mod version;
 
 use methods::Method;
@@ -43,6 +46,11 @@ use requests::{
     GenerateStringsRequest,
     GenerateUUIDsRequest,
     GenerateBlobsRequest,
+};
+pub use request_builders::{
+    RequestIntegers,
+    RequestDecimalFractions,
+    RequestGaussians,
 };
 pub use model::{
     ApiKey,
@@ -122,6 +130,63 @@ impl Random {
             client: reqwest::Client::new()?,
             api_key: ApiKey(api_key.into()),
         })
+    }
+
+    /// Create a request object for generating random integers
+    /// 
+    /// # Usage
+    ///
+    /// ```rust,no_run
+    /// extern crate randomorg;
+    /// 
+    /// fn main() {
+    ///     use randomorg::Random;
+    ///     let r = Random::new("API KEY HERE").unwrap();
+    ///     let random_data = r.request_integers().min(0).max(100).limit(5).collect::<Vec<i32>>();
+    ///     println!("Random integers: {:?}", random_data);
+    /// }
+    /// ```
+    pub fn request_integers(&self) -> RequestIntegers {
+        RequestIntegers::new(self)
+    }
+
+    /// Create a request object for generating random decimal fractions
+    /// 
+    /// # Usage
+    ///
+    /// ```rust,no_run
+    /// extern crate randomorg;
+    /// 
+    /// fn main() {
+    ///     use randomorg::Random;
+    ///     let r = Random::new("API KEY HERE").unwrap();
+    ///     let random_data = r.request_decimal_fractions().limit(5)
+    ///                                                    .decimal_places(4)
+    ///                                                    .collect::<Vec<f32>>();
+    ///     println!("Random decimal fractions: {:?}", random_data);
+    /// }
+    /// ```
+    pub fn request_decimal_fractions(&self) -> RequestDecimalFractions {
+        RequestDecimalFractions::new(self)
+    }
+
+    /// Create a request object for generating random gaussians
+    /// 
+    /// # Usage
+    ///
+    /// ```rust,no_run
+    /// extern crate randomorg;
+    /// 
+    /// fn main() {
+    ///     use randomorg::Random;
+    ///     let r = Random::new("API KEY HERE").unwrap();
+    ///     let random_data = r.request_gaussians().limit(5)
+    ///                                            .collect::<Vec<f32>>();
+    ///     println!("Random gaussians: {:?}", random_data);
+    /// }
+    /// ```
+    pub fn request_gaussians(&self) -> RequestGaussians {
+        RequestGaussians::new(self)
     }
 
     /// This method generates true random integers within a user-defined range.

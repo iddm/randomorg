@@ -1,9 +1,13 @@
 use ::{
     Random,
+    AllowedCharacters,
     Response,
+
     GenerateIntegersResult,
     GenerateDecimalFractionsResult,
     GenerateGaussiansResult,
+    GenerateStringsResult,
+
     Result,
 };
 
@@ -120,5 +124,42 @@ impl<'a> RequestGaussians<'a> {
                                                   self.mean,
                                                   self.standard_deviation,
                                                   self.significant_digits)?))
+    }
+}
+
+
+/// A lazy strings request (builder)
+pub struct RequestStrings<'a> {
+    client: &'a Random,
+    limit: u16,
+    length: u8,
+    characters: AllowedCharacters,
+}
+
+impl<'a> RequestStrings<'a> {
+    /// Creates a lazy strings request (builder)
+    pub fn new(client: &'a Random) -> RequestStrings {
+        use std::collections::BTreeSet;
+
+        RequestStrings {
+            client: client,
+            limit: 10u16,
+            length: 0u8,
+            characters: AllowedCharacters("0123456789abcdef".chars().collect::<BTreeSet<char>>()),
+        }
+    }
+
+    builder!(limit, u16);
+    builder!(length, u8);
+    builder!(characters, AllowedCharacters);
+}
+
+/// Terminators
+impl<'a> RequestStrings<'a> {
+    /// Collect the random strings (performs the request)
+    pub fn collect<T: From<Response<GenerateStringsResult>>>(self) -> Result<T> {
+        Ok(T::from(self.client.generate_strings(self.limit,
+                                                self.length,
+                                                self.characters)?))
     }
 }

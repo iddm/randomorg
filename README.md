@@ -1,6 +1,6 @@
 # random.org
 [![Build status](https://travis-ci.org/vityafx/randomorg.svg?branch=master)](https://travis-ci.org/vityafx/randomorg)
-[![Crates](https://img.shields.io/crates/v/randomorg)](https://crates.io/crates/randomorg)
+[![Crates](https://img.shields.io/crates/v/randomorg.svg)](https://crates.io/crates/randomorg)
 [![Docs](https://docs.rs/randomorg/badge.svg)](https://docs.rs/randomorg)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 

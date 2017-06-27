@@ -17,6 +17,15 @@
 //!     println!("Random integers: {:?}", random_data);
 //! }
 //! ```
+//! 
+//! # Warning
+//! 
+//! However the library provides a thread-safe object, the **random.org** service does not allow
+//! to use their API from multithreaded-apps. The service processes incoming calls according the
+//! `request_id` parameter, it must be different for concurrent calls, while this library always
+//! provides `request_id` equal to `1`. So when you use the library from multiple threads the 
+//! library will send multiple requests simultaneously with the same `request_id` field and the 
+//! **random.org** service will refuse to process them.
 
 #[macro_use]
 extern crate serde_derive;

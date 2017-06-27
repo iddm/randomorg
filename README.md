@@ -32,7 +32,11 @@ extern crate randomorg;
 fn main() {
     use randomorg::Random;
     let r = Random::new("API KEY HERE").unwrap();
+    // A method-call way:
     println!("Result: {:?}", r.generate_integers(-100, 100, 15, true));
+    // A lazy request builder way:
+    let random_data = r.request_integers().min(0).max(100).limit(5).collect::<Vec<i32>>();
+    println!("Random integers: {:?}", random_data);
 }
 ```
 

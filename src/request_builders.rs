@@ -7,6 +7,7 @@ use ::{
     GenerateDecimalFractionsResult,
     GenerateGaussiansResult,
     GenerateStringsResult,
+    GenerateUUIDsResult,
 
     Result,
 };
@@ -161,5 +162,32 @@ impl<'a> RequestStrings<'a> {
         Ok(T::from(self.client.generate_strings(self.limit,
                                                 self.length,
                                                 self.characters)?))
+    }
+}
+
+
+/// A lazy UUIDs request (builder)
+pub struct RequestUUIDs<'a> {
+    client: &'a Random,
+    limit: u16,
+}
+
+impl<'a> RequestUUIDs<'a> {
+    /// Creates a lazy UUIDs request (builder)
+    pub fn new(client: &'a Random) -> RequestUUIDs {
+        RequestUUIDs {
+            client: client,
+            limit: 10u16,
+        }
+    }
+
+    builder!(limit, u16);
+}
+
+/// Terminators
+impl<'a> RequestUUIDs<'a> {
+    /// Collect the random UUIDs (performs the request)
+    pub fn collect<T: From<Response<GenerateUUIDsResult>>>(self) -> Result<T> {
+        Ok(T::from(self.client.generate_uuids(self.limit)?))
     }
 }

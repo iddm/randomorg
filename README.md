@@ -14,7 +14,7 @@ Everything is implemented. Note, that the `random.org` service API is at beta st
 however the library will try to be up-to-date.
 
 ## The documentation
-The [documentation](https://docs.rs/toornament) which may help you using this library.
+The [documentation](https://docs.rs/randomorg) which may help you using this library.
 
 ## Implementation
 - Immutable interface, no need to synchronize, thread-safe (`Sync` and `Send`).

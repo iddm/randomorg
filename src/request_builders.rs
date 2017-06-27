@@ -8,6 +8,7 @@ use ::{
     GenerateGaussiansResult,
     GenerateStringsResult,
     GenerateUUIDsResult,
+    GenerateBlobsResult,
 
     Result,
 };
@@ -189,5 +190,35 @@ impl<'a> RequestUUIDs<'a> {
     /// Collect the random UUIDs (performs the request)
     pub fn collect<T: From<Response<GenerateUUIDsResult>>>(self) -> Result<T> {
         Ok(T::from(self.client.generate_uuids(self.limit)?))
+    }
+}
+
+
+/// A lazy blobs request (builder)
+pub struct RequestBlobs<'a> {
+    client: &'a Random,
+    limit: u16,
+    size: u32,
+}
+
+impl<'a> RequestBlobs<'a> {
+    /// Creates a lazy blobs request (builder)
+    pub fn new(client: &'a Random) -> RequestBlobs {
+        RequestBlobs {
+            client: client,
+            limit: 10u16,
+            size: 128u32,
+        }
+    }
+
+    builder!(limit, u16);
+    builder!(size, u32);
+}
+
+/// Terminators
+impl<'a> RequestBlobs<'a> {
+    /// Collect the random blobs (performs the request)
+    pub fn collect<T: From<Response<GenerateBlobsResult>>>(self) -> Result<T> {
+        Ok(T::from(self.client.generate_blobs(self.limit, self.size)?))
     }
 }

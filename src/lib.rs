@@ -53,6 +53,7 @@ pub use request_builders::{
     RequestGaussians,
     RequestStrings,
     RequestUUIDs,
+    RequestBlobs,
 };
 pub use model::{
     ApiKey,
@@ -227,6 +228,25 @@ impl Random {
     /// ```
     pub fn request_uuids(&self) -> RequestUUIDs {
         RequestUUIDs::new(self)
+    }
+
+    /// Create a request object for generating random blobs
+    /// 
+    /// # Usage
+    ///
+    /// ```rust,no_run
+    /// extern crate randomorg;
+    /// 
+    /// fn main() {
+    ///     use randomorg::Random;
+    ///     let r = Random::new("API KEY HERE").unwrap();
+    ///     let random_data = r.request_blobs().limit(5)
+    ///                                        .collect::<Vec<String>>();
+    ///     println!("Random strings: {:?}", random_data);
+    /// }
+    /// ```
+    pub fn request_blobs(&self) -> RequestBlobs {
+        RequestBlobs::new(self)
     }
 
     /// This method generates true random integers within a user-defined range.

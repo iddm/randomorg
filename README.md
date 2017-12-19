@@ -31,7 +31,7 @@ extern crate randomorg;
 
 fn main() {
     use randomorg::Random;
-    let r = Random::new("API KEY HERE").unwrap();
+    let r = Random::new("API KEY HERE");
     // A method-call way:
     println!("Result: {:?}", r.generate_integers(-100, 100, 15, true));
     // A lazy request builder way:

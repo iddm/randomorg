@@ -4,7 +4,6 @@ use methods::Method;
 
 const API_JSON_RPC_VERSION: &'static str = "2.0";
 
-
 /// Empty request - has nothing but api key inside.
 /// Used in `getUsage` method.
 pub type EmptyRequest = Request<ApiKeyParams>;
@@ -22,12 +21,13 @@ impl EmptyRequest {
 /// A request for `generateIntegers` method.
 pub type GenerateIntegersRequest = Request<GenerateIntegersParams>;
 impl GenerateIntegersRequest {
-    pub fn new(api_key: ApiKey,
-               min: i32,
-               max: i32,
-               limit: u16,
-               replacement: bool)
-        -> GenerateIntegersRequest {
+    pub fn new(
+        api_key: ApiKey,
+        min: i32,
+        max: i32,
+        limit: u16,
+        replacement: bool,
+    ) -> GenerateIntegersRequest {
         GenerateIntegersRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateIntegers,
@@ -43,14 +43,10 @@ impl GenerateIntegersRequest {
     }
 }
 
-
 /// A request for `generateDecimalFractions` method.
 pub type GenerateDecimalFractionsRequest = Request<GenerateDecimalFractionsParams>;
 impl GenerateDecimalFractionsRequest {
-    pub fn new(api_key: ApiKey,
-               limit: u16,
-               decimal_places: u8)
-        -> GenerateDecimalFractionsRequest {
+    pub fn new(api_key: ApiKey, limit: u16, decimal_places: u8) -> GenerateDecimalFractionsRequest {
         GenerateDecimalFractionsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateDecimalFractions,
@@ -64,16 +60,16 @@ impl GenerateDecimalFractionsRequest {
     }
 }
 
-
 /// A request for `generateGaussians` method.
 pub type GenerateGaussiansRequest = Request<GenerateGaussiansParams>;
 impl GenerateGaussiansRequest {
-    pub fn new(api_key: ApiKey,
-               limit: u16,
-               mean: i32,
-               standard_deviation: i32,
-               significant_digits: u8)
-        -> GenerateGaussiansRequest {
+    pub fn new(
+        api_key: ApiKey,
+        limit: u16,
+        mean: i32,
+        standard_deviation: i32,
+        significant_digits: u8,
+    ) -> GenerateGaussiansRequest {
         GenerateGaussiansRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateGaussians,
@@ -89,12 +85,15 @@ impl GenerateGaussiansRequest {
     }
 }
 
-
 /// A request for `generateStrings` method.
 pub type GenerateStringsRequest = Request<GenerateStringsParams>;
 impl GenerateStringsRequest {
-    pub fn new(api_key: ApiKey, limit: u16, length: u8, characters: AllowedCharacters)
-        -> GenerateStringsRequest {
+    pub fn new(
+        api_key: ApiKey,
+        limit: u16,
+        length: u8,
+        characters: AllowedCharacters,
+    ) -> GenerateStringsRequest {
         GenerateStringsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateStrings,
@@ -109,12 +108,10 @@ impl GenerateStringsRequest {
     }
 }
 
-
 /// A request for `generateUUIDs` method.
 pub type GenerateUUIDsRequest = Request<GenerateUUIDsParams>;
 impl GenerateUUIDsRequest {
-    pub fn new(api_key: ApiKey, limit: u16)
-        -> GenerateUUIDsRequest {
+    pub fn new(api_key: ApiKey, limit: u16) -> GenerateUUIDsRequest {
         GenerateUUIDsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateUUIDs,
@@ -127,12 +124,10 @@ impl GenerateUUIDsRequest {
     }
 }
 
-
 /// A request for `generateBlobs` method.
 pub type GenerateBlobsRequest = Request<GenerateBlobsParams>;
 impl GenerateBlobsRequest {
-    pub fn new(api_key: ApiKey, limit: u16, size: u32)
-        -> GenerateBlobsRequest {
+    pub fn new(api_key: ApiKey, limit: u16, size: u32) -> GenerateBlobsRequest {
         GenerateBlobsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateBlobs,

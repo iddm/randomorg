@@ -3,7 +3,6 @@ use methods::Method;
 
 use std::collections::BTreeSet;
 
-
 /// An unique random.org request id
 #[derive(Debug, Clone, Eq, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
 pub struct RequestId(pub u64);

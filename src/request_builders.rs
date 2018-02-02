@@ -1,18 +1,6 @@
-use ::{
-    Random,
-    AllowedCharacters,
-    Response,
-
-    GenerateIntegersResult,
-    GenerateDecimalFractionsResult,
-    GenerateGaussiansResult,
-    GenerateStringsResult,
-    GenerateUUIDsResult,
-    GenerateBlobsResult,
-
-    Result,
-};
-
+use {AllowedCharacters, GenerateBlobsResult, GenerateDecimalFractionsResult,
+     GenerateGaussiansResult, GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult,
+     Random, Response, Result};
 
 macro_rules! builder {
     ($field:ident, $field_type:ty) => {
@@ -23,7 +11,6 @@ macro_rules! builder {
         }
     };
 }
-
 
 /// A lazy integers request (builder)
 pub struct RequestIntegers<'a> {
@@ -56,10 +43,14 @@ impl<'a> RequestIntegers<'a> {
 impl<'a> RequestIntegers<'a> {
     /// Collect the random integers (performs the request)
     pub fn collect<T: From<Response<GenerateIntegersResult>>>(self) -> Result<T> {
-        Ok(T::from(self.client.generate_integers(self.min, self.max, self.limit, self.replacement)?))
+        Ok(T::from(self.client.generate_integers(
+            self.min,
+            self.max,
+            self.limit,
+            self.replacement,
+        )?))
     }
 }
-
 
 /// A lazy decimal fractions request (builder)
 pub struct RequestDecimalFractions<'a> {
@@ -86,10 +77,12 @@ impl<'a> RequestDecimalFractions<'a> {
 impl<'a> RequestDecimalFractions<'a> {
     /// Collect the random decimal fractions (performs the request)
     pub fn collect<T: From<Response<GenerateDecimalFractionsResult>>>(self) -> Result<T> {
-        Ok(T::from(self.client.generate_decimal_fractions(self.limit, self.decimal_places)?))
+        Ok(T::from(self.client.generate_decimal_fractions(
+            self.limit,
+            self.decimal_places,
+        )?))
     }
 }
-
 
 /// A lazy gaussians request (builder)
 pub struct RequestGaussians<'a> {
@@ -122,13 +115,14 @@ impl<'a> RequestGaussians<'a> {
 impl<'a> RequestGaussians<'a> {
     /// Collect the random gaussians (performs the request)
     pub fn collect<T: From<Response<GenerateGaussiansResult>>>(self) -> Result<T> {
-        Ok(T::from(self.client.generate_gaussians(self.limit,
-                                                  self.mean,
-                                                  self.standard_deviation,
-                                                  self.significant_digits)?))
+        Ok(T::from(self.client.generate_gaussians(
+            self.limit,
+            self.mean,
+            self.standard_deviation,
+            self.significant_digits,
+        )?))
     }
 }
-
 
 /// A lazy strings request (builder)
 pub struct RequestStrings<'a> {
@@ -160,12 +154,13 @@ impl<'a> RequestStrings<'a> {
 impl<'a> RequestStrings<'a> {
     /// Collect the random strings (performs the request)
     pub fn collect<T: From<Response<GenerateStringsResult>>>(self) -> Result<T> {
-        Ok(T::from(self.client.generate_strings(self.limit,
-                                                self.length,
-                                                self.characters)?))
+        Ok(T::from(self.client.generate_strings(
+            self.limit,
+            self.length,
+            self.characters,
+        )?))
     }
 }
-
 
 /// A lazy UUIDs request (builder)
 pub struct RequestUUIDs<'a> {
@@ -192,7 +187,6 @@ impl<'a> RequestUUIDs<'a> {
         Ok(T::from(self.client.generate_uuids(self.limit)?))
     }
 }
-
 
 /// A lazy blobs request (builder)
 pub struct RequestBlobs<'a> {

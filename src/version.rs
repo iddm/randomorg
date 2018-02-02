@@ -4,7 +4,7 @@
 //!
 //! ```rust,no_run
 //! use randomorg::version::*;
-//! 
+//!
 //! println!("Crate info:\n\tVersion: {}\n\tAuthors: {}\n\tName: {}\n\tHome page:
 //! {}\n\tDescription: {}",
 //!     CRATE_VERSION,
@@ -12,7 +12,7 @@
 //!     CRATE_NAME,
 //!     CRATE_HOMEPAGE,
 //!     CRATE_DESCRIPTION);
-//!     
+//!
 //! println!("Build info:\n\tBuild date: {}\n\tCommit: {} of {}\n\tTarget: {}\n\tGit version: {}
 //! \n\tFeatures: {}\n\tProfile: {}",
 //!     version::short_now(),

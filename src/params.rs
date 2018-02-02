@@ -1,6 +1,5 @@
 use model::ApiKey;
 
-
 /// A random.org api key params
 #[derive(Debug, Clone, Serialize)]
 pub struct ApiKeyParams {
@@ -8,7 +7,6 @@ pub struct ApiKeyParams {
     #[serde(rename = "apiKey")]
     pub api_key: ApiKey,
 }
-
 
 /// A random.org `generateIntegers` method params
 #[derive(Debug, Clone, Serialize)]
@@ -39,7 +37,6 @@ pub struct GenerateIntegersParams {
     */
 }
 
-
 /// A random.org `generateDecimalFractions` method params
 #[derive(Debug, Clone, Serialize)]
 pub struct GenerateDecimalFractionsParams {
@@ -53,7 +50,6 @@ pub struct GenerateDecimalFractionsParams {
     #[serde(rename = "decimalPlaces")]
     pub decimal_places: u8,
 }
-
 
 /// A random.org `generateGaussians` method params
 #[derive(Debug, Clone, Serialize)]
@@ -69,11 +65,10 @@ pub struct GenerateGaussiansParams {
     /// The distribution's standard deviation. Must be within the [-1e6,1e6] range.
     #[serde(rename = "standardDeviation")]
     pub standard_deviation: i32,
-    /// The number of significant digits to use. Must be within the [2,20] range. 
+    /// The number of significant digits to use. Must be within the [2,20] range.
     #[serde(rename = "significantDigits")]
     pub significant_digits: u8,
 }
-
 
 /// A random.org `generateStrings` method params
 #[derive(Debug, Clone, Serialize)]
@@ -92,7 +87,6 @@ pub struct GenerateStringsParams {
     pub characters: String,
 }
 
-
 /// A random.org `generateUUIDs` method params
 #[derive(Debug, Clone, Serialize)]
 pub struct GenerateUUIDsParams {
@@ -103,7 +97,6 @@ pub struct GenerateUUIDsParams {
     #[serde(rename = "n")]
     pub limit: u16,
 }
-
 
 /// A random.org `generateBlobs` method params
 #[derive(Debug, Clone, Serialize)]

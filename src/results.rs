@@ -1,7 +1,6 @@
 use chrono;
-use model::{ ApiKeyStatus, Response };
+use model::{ApiKeyStatus, Response};
 use date_de;
-
 
 /// A random.org response of `getUsage` method.
 #[derive(Debug, Clone, Deserialize)]
@@ -81,7 +80,6 @@ pub type GenerateUUIDsResult = RandomResult<String>;
 /// A random.org response of `GenerateBlobs` method.
 pub type GenerateBlobsResult = RandomResult<String>;
 
-
 impl From<Response<RandomResult<i32>>> for Vec<i32> {
     fn from(response: Response<RandomResult<i32>>) -> Vec<i32> {
         response.result.random.data
@@ -100,15 +98,14 @@ impl From<Response<RandomResult<String>>> for Vec<String> {
     }
 }
 
-
 #[cfg(test)]
 mod parse_tests {
-    use ::serde_json;
+    use serde_json;
 
     #[test]
     fn test_get_usage_response_parse() {
-        use ::{ Response, GetUsageResult, ApiKeyStatus, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {ApiKeyStatus, GetUsageResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -144,8 +141,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_integers_response_parse() {
-        use ::{ Response, GenerateIntegersResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateIntegersResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -185,8 +182,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_decimal_fractions_response_parse() {
-        use ::{ Response, GenerateDecimalFractionsResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateDecimalFractionsResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -212,9 +209,13 @@ mod parse_tests {
 
         assert_eq!(u.json_rpc, "2.0");
         assert_eq!(u.id, RequestId(42));
-        assert_eq!(u.result.random.data, vec![0.0753205, 0.59823072, 0.46109946, 0.28453638,
-                                              0.92390558, 0.53087566, 0.48139983, 0.06829921,
-                                              0.1878, 0.10107864]);
+        assert_eq!(
+            u.result.random.data,
+            vec![
+                0.0753205, 0.59823072, 0.46109946, 0.28453638, 0.92390558, 0.53087566, 0.48139983,
+                0.06829921, 0.1878, 0.10107864,
+            ]
+        );
         assert_eq!(u.result.random.completion_time.year(), 2011i32);
         assert_eq!(u.result.random.completion_time.month(), 10u32);
         assert_eq!(u.result.random.completion_time.day(), 10u32);
@@ -229,8 +230,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_gaussians_response_parse() {
-        use ::{ Response, GenerateGaussiansResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateGaussiansResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -255,7 +256,10 @@ mod parse_tests {
 
         assert_eq!(u.json_rpc, "2.0");
         assert_eq!(u.id, RequestId(42));
-        assert_eq!(u.result.random.data, vec![0.4025041, -1.4918831, 0.64733849, 0.5222242]);
+        assert_eq!(
+            u.result.random.data,
+            vec![0.4025041, -1.4918831, 0.64733849, 0.5222242]
+        );
         assert_eq!(u.result.random.completion_time.year(), 2011i32);
         assert_eq!(u.result.random.completion_time.month(), 10u32);
         assert_eq!(u.result.random.completion_time.day(), 10u32);
@@ -270,8 +274,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_strings_response_parse() {
-        use ::{ Response, GenerateStringsResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateStringsResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -297,9 +301,19 @@ mod parse_tests {
 
         assert_eq!(u.json_rpc, "2.0");
         assert_eq!(u.id, RequestId(42));
-        assert_eq!(u.result.random.data, vec!["grvhglvahj", "hjrmosjwed", "nivjyqptyy",
-                                              "lhogeshsmi", "syilbgsytb", "birvcmgdrz",
-                                              "wgclyynpcq", "eujwnhgonh"]);
+        assert_eq!(
+            u.result.random.data,
+            vec![
+                "grvhglvahj",
+                "hjrmosjwed",
+                "nivjyqptyy",
+                "lhogeshsmi",
+                "syilbgsytb",
+                "birvcmgdrz",
+                "wgclyynpcq",
+                "eujwnhgonh",
+            ]
+        );
         assert_eq!(u.result.random.completion_time.year(), 2011i32);
         assert_eq!(u.result.random.completion_time.month(), 10u32);
         assert_eq!(u.result.random.completion_time.day(), 10u32);
@@ -314,8 +328,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_uuids_response_parse() {
-        use ::{ Response, GenerateUUIDsResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateUUIDsResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -340,7 +354,10 @@ mod parse_tests {
 
         assert_eq!(u.json_rpc, "2.0");
         assert_eq!(u.id, RequestId(42));
-        assert_eq!(u.result.random.data, vec!["47849fd4-b790-492e-8b93-c601a91b662d"]);
+        assert_eq!(
+            u.result.random.data,
+            vec!["47849fd4-b790-492e-8b93-c601a91b662d"]
+        );
         assert_eq!(u.result.random.completion_time.year(), 2011i32);
         assert_eq!(u.result.random.completion_time.month(), 10u32);
         assert_eq!(u.result.random.completion_time.day(), 10u32);
@@ -355,8 +372,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_blobs_response_parse() {
-        use ::{ Response, GenerateBlobsResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateBlobsResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let s = r#"
         {
@@ -397,8 +414,8 @@ mod parse_tests {
 
     #[test]
     fn test_incorrect_and_correct_dates_parse() {
-        use ::{ Response, GenerateBlobsResult, RequestId, };
-        use chrono::{ Datelike, Timelike };
+        use {GenerateBlobsResult, RequestId, Response};
+        use chrono::{Datelike, Timelike};
 
         let correct = r#"
         {

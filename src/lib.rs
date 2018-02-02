@@ -27,12 +27,12 @@
 //! library will send multiple requests simultaneously with the same `request_id` field and the
 //! **random.org** service will refuse to process them.
 
+extern crate chrono;
+extern crate reqwest;
+extern crate serde;
 #[macro_use]
 extern crate serde_derive;
-extern crate serde;
 extern crate serde_json;
-extern crate reqwest;
-extern crate chrono;
 
 use reqwest::header::ContentType;
 
@@ -47,45 +47,17 @@ mod request_builders;
 pub mod version;
 
 use methods::Method;
-use requests::{
-    EmptyRequest,
-    GenerateIntegersRequest,
-    GenerateDecimalFractionsRequest,
-    GenerateGaussiansRequest,
-    GenerateStringsRequest,
-    GenerateUUIDsRequest,
-    GenerateBlobsRequest,
-};
-pub use request_builders::{
-    RequestIntegers,
-    RequestDecimalFractions,
-    RequestGaussians,
-    RequestStrings,
-    RequestUUIDs,
-    RequestBlobs,
-};
-pub use model::{
-    ApiKey,
-    ApiKeyStatus,
-    AllowedCharacters,
-    Request,
-    RequestId,
-    Response,
-};
-pub use results:: {
-    GetUsageResult,
-    RandomResult,
-    RandomData,
-    GenerateIntegersResult,
-    GenerateDecimalFractionsResult,
-    GenerateGaussiansResult,
-    GenerateStringsResult,
-    GenerateUUIDsResult,
-    GenerateBlobsResult,
-};
+use requests::{EmptyRequest, GenerateBlobsRequest, GenerateDecimalFractionsRequest,
+               GenerateGaussiansRequest, GenerateIntegersRequest, GenerateStringsRequest,
+               GenerateUUIDsRequest};
+pub use request_builders::{RequestBlobs, RequestDecimalFractions, RequestGaussians,
+                           RequestIntegers, RequestStrings, RequestUUIDs};
+pub use model::{AllowedCharacters, ApiKey, ApiKeyStatus, Request, RequestId, Response};
+pub use results::{GenerateBlobsResult, GenerateDecimalFractionsResult, GenerateGaussiansResult,
+                  GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult,
+                  GetUsageResult, RandomData, RandomResult};
 
-pub use error::{ Error, ErrorCode, ResponseError, Result };
-
+pub use error::{Error, ErrorCode, ResponseError, Result};
 
 const API_INVOKE: &'static str = "https://api.random.org/json-rpc/2/invoke";
 
@@ -95,14 +67,14 @@ fn retry(mut builder: reqwest::RequestBuilder) -> Result<reqwest::Response> {
     // retry on a ConnectionAborted, which occurs if it's been a while since the last request
     match f2() {
         Err(_) => f2(),
-        other => other
+        other => other,
     }
 }
 
 fn check_status(response: reqwest::Result<reqwest::Response>) -> Result<reqwest::Response> {
     let response = response?;
     if !response.status().is_success() {
-        return Err(Error::from(response))
+        return Err(Error::from(response));
     }
     Ok(response)
 }
@@ -126,8 +98,6 @@ macro_rules! request {
         Ok(make_request!($api, serde_json::to_string(&$request)?)?.json()?)
     };
 }
-
-
 
 /// A random.org api client.
 pub struct Random {
@@ -289,13 +259,15 @@ impl Random {
     /// * `min` must be within [-1e9; 1e9] range
     /// * `max` must be within [-1e9; 1e9] range
     /// * `limit` must be within [1; 1e4] range
-    pub fn generate_integers(&self, min: i32, max: i32, limit: u16, replacement: bool)
-        -> Result<Response<GenerateIntegersResult>> {
-        let request = GenerateIntegersRequest::new(self.api_key.clone(),
-                                                   min,
-                                                   max,
-                                                   limit,
-                                                   replacement);
+    pub fn generate_integers(
+        &self,
+        min: i32,
+        max: i32,
+        limit: u16,
+        replacement: bool,
+    ) -> Result<Response<GenerateIntegersResult>> {
+        let request =
+            GenerateIntegersRequest::new(self.api_key.clone(), min, max, limit, replacement);
         request!(self, request)
     }
 
@@ -319,11 +291,13 @@ impl Random {
     /// # Constraints
     /// * `limit` must be within [1; 1e4] range
     /// * `decimal_places` must be within [1; 20] range
-    pub fn generate_decimal_fractions(&self, limit: u16, decimal_places: u8)
-        -> Result<Response<GenerateDecimalFractionsResult>> {
-        let request = GenerateDecimalFractionsRequest::new(self.api_key.clone(),
-                                                           limit,
-                                                           decimal_places);
+    pub fn generate_decimal_fractions(
+        &self,
+        limit: u16,
+        decimal_places: u8,
+    ) -> Result<Response<GenerateDecimalFractionsResult>> {
+        let request =
+            GenerateDecimalFractionsRequest::new(self.api_key.clone(), limit, decimal_places);
         request!(self, request)
     }
 
@@ -350,17 +324,20 @@ impl Random {
     /// * `mean` must be within [-1e6; 1e6] range
     /// * `standard_deviation` must be within [-1e6; 1e6] range
     /// * `significant_digits` must be within [2; 20] range
-    pub fn generate_gaussians(&self,
-                              limit: u16,
-                              mean: i32,
-                              standard_deviation: i32,
-                              significant_digits: u8)
-        -> Result<Response<GenerateGaussiansResult>> {
-        let request = GenerateGaussiansRequest::new(self.api_key.clone(),
-                                                    limit,
-                                                    mean,
-                                                    standard_deviation,
-                                                    significant_digits);
+    pub fn generate_gaussians(
+        &self,
+        limit: u16,
+        mean: i32,
+        standard_deviation: i32,
+        significant_digits: u8,
+    ) -> Result<Response<GenerateGaussiansResult>> {
+        let request = GenerateGaussiansRequest::new(
+            self.api_key.clone(),
+            limit,
+            mean,
+            standard_deviation,
+            significant_digits,
+        );
         request!(self, request)
     }
 
@@ -386,12 +363,13 @@ impl Random {
     /// * `limit` must be within [1; 1e4] range
     /// * `length` must be within [1; 20] range
     /// * `characters` must contain maximum 80 characters.
-    pub fn generate_strings(&self, limit: u16, length: u8, characters: AllowedCharacters)
-        -> Result<Response<GenerateStringsResult>> {
-        let request = GenerateStringsRequest::new(self.api_key.clone(),
-                                                  limit,
-                                                  length,
-                                                  characters);
+    pub fn generate_strings(
+        &self,
+        limit: u16,
+        length: u8,
+        characters: AllowedCharacters,
+    ) -> Result<Response<GenerateStringsResult>> {
+        let request = GenerateStringsRequest::new(self.api_key.clone(), limit, length, characters);
         request!(self, request)
     }
 
@@ -463,7 +441,6 @@ impl Random {
         request!(self, request)
     }
 }
-
 
 #[cfg(test)]
 mod tests {

@@ -1,6 +1,8 @@
-use {AllowedCharacters, GenerateBlobsResult, GenerateDecimalFractionsResult,
-     GenerateGaussiansResult, GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult,
-     Random, Response, Result};
+use {
+    AllowedCharacters, GenerateBlobsResult, GenerateDecimalFractionsResult,
+    GenerateGaussiansResult, GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult,
+    Random, Response, Result,
+};
 
 macro_rules! builder {
     ($field:ident, $field_type:ty) => {
@@ -25,7 +27,7 @@ impl<'a> RequestIntegers<'a> {
     /// Creates a lazy integers request (builder)
     pub fn new(client: &'a Random) -> RequestIntegers {
         RequestIntegers {
-            client: client,
+            client,
             min: 0i32,
             max: 100i32,
             limit: 10,
@@ -63,7 +65,7 @@ impl<'a> RequestDecimalFractions<'a> {
     /// Creates a lazy decimal fractions request (builder)
     pub fn new(client: &'a Random) -> RequestDecimalFractions {
         RequestDecimalFractions {
-            client: client,
+            client,
             limit: 10u16,
             decimal_places: 4u8,
         }
@@ -97,7 +99,7 @@ impl<'a> RequestGaussians<'a> {
     /// Creates a lazy gaussians request (builder)
     pub fn new(client: &'a Random) -> RequestGaussians {
         RequestGaussians {
-            client: client,
+            client,
             limit: 10u16,
             mean: 0i32,
             standard_deviation: 0i32,
@@ -138,7 +140,7 @@ impl<'a> RequestStrings<'a> {
         use std::collections::BTreeSet;
 
         RequestStrings {
-            client: client,
+            client,
             limit: 10u16,
             length: 0u8,
             characters: AllowedCharacters("0123456789abcdef".chars().collect::<BTreeSet<char>>()),
@@ -172,7 +174,7 @@ impl<'a> RequestUUIDs<'a> {
     /// Creates a lazy UUIDs request (builder)
     pub fn new(client: &'a Random) -> RequestUUIDs {
         RequestUUIDs {
-            client: client,
+            client,
             limit: 10u16,
         }
     }
@@ -199,7 +201,7 @@ impl<'a> RequestBlobs<'a> {
     /// Creates a lazy blobs request (builder)
     pub fn new(client: &'a Random) -> RequestBlobs {
         RequestBlobs {
-            client: client,
+            client,
             limit: 10u16,
             size: 128u32,
         }

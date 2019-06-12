@@ -1,8 +1,8 @@
+use methods::Method;
 use model::*;
 use params::*;
-use methods::Method;
 
-const API_JSON_RPC_VERSION: &'static str = "2.0";
+const API_JSON_RPC_VERSION: &str = "2.0";
 
 /// Empty request - has nothing but api key inside.
 /// Used in `getUsage` method.
@@ -11,8 +11,8 @@ impl EmptyRequest {
     pub fn new(method: Method, api_key: ApiKey) -> EmptyRequest {
         EmptyRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
-            method: method,
-            params: ApiKeyParams { api_key: api_key },
+            method,
+            params: ApiKeyParams { api_key },
             id: RequestId(1),
         }
     }
@@ -32,11 +32,11 @@ impl GenerateIntegersRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateIntegers,
             params: GenerateIntegersParams {
-                api_key: api_key,
-                min: min,
-                max: max,
-                limit: limit,
-                replacement: replacement,
+                api_key,
+                min,
+                max,
+                limit,
+                replacement,
             },
             id: RequestId(1),
         }
@@ -51,9 +51,9 @@ impl GenerateDecimalFractionsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateDecimalFractions,
             params: GenerateDecimalFractionsParams {
-                api_key: api_key,
-                limit: limit,
-                decimal_places: decimal_places,
+                api_key,
+                limit,
+                decimal_places,
             },
             id: RequestId(1),
         }
@@ -74,11 +74,11 @@ impl GenerateGaussiansRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateGaussians,
             params: GenerateGaussiansParams {
-                api_key: api_key,
-                limit: limit,
-                mean: mean,
-                standard_deviation: standard_deviation,
-                significant_digits: significant_digits,
+                api_key,
+                limit,
+                mean,
+                standard_deviation,
+                significant_digits,
             },
             id: RequestId(1),
         }
@@ -98,9 +98,9 @@ impl GenerateStringsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateStrings,
             params: GenerateStringsParams {
-                api_key: api_key,
-                limit: limit,
-                length: length,
+                api_key,
+                limit,
+                length,
                 characters: characters.0.iter().collect::<String>(),
             },
             id: RequestId(1),
@@ -115,10 +115,7 @@ impl GenerateUUIDsRequest {
         GenerateUUIDsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateUUIDs,
-            params: GenerateUUIDsParams {
-                api_key: api_key,
-                limit: limit,
-            },
+            params: GenerateUUIDsParams { api_key, limit },
             id: RequestId(1),
         }
     }
@@ -132,9 +129,9 @@ impl GenerateBlobsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
             method: Method::GenerateBlobs,
             params: GenerateBlobsParams {
-                api_key: api_key,
-                limit: limit,
-                size: size,
+                api_key,
+                limit,
+                size,
             },
             id: RequestId(1),
         }

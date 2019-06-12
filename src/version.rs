@@ -2,7 +2,7 @@
 //!
 //! # Usage
 //!
-//! ```rust,no_run
+//! ```rust
 //! use randomorg::version::*;
 //!
 //! println!("Crate info:\n\tVersion: {}\n\tAuthors: {}\n\tName: {}\n\tHome page:
@@ -13,21 +13,24 @@
 //!     CRATE_HOMEPAGE,
 //!     CRATE_DESCRIPTION);
 //!
-//! println!("Build info:\n\tBuild date: {}\n\tCommit: {} of {}\n\tTarget: {}\n\tGit version: {}
+//! println!("Build info:\n\tCommit: {} of {}\n\tTarget: {}\n\tGit version: {}
 //! \n\tFeatures: {}\n\tProfile: {}",
-//!     version::short_now(),
-//!     version::short_sha(),
-//!     version::commit_date(),
-//!     version::target(),
-//!     version::semver(),
+//!     SHA,
+//!     BUILD_TIMESTAMP,
+//!     TARGET_TRIPLE,
+//!     SEMVER,
 //!     build::features(),
 //!     build::profile());
 //! ```
 
-/// Contains version information about the library, mostly got from git.
-pub mod version {
-    include!(concat!(env!("OUT_DIR"), "/version.rs"));
-}
+/// Commit SHA hash
+pub const SHA: &str = env!("VERGEN_SHA");
+/// Build timestamp.
+pub const BUILD_TIMESTAMP: &str = env!("VERGEN_BUILD_TIMESTAMP");
+/// Built for this target triple.
+pub const TARGET_TRIPLE: &str = env!("VERGEN_TARGET_TRIPLE");
+/// Semantic version.
+pub const SEMVER: &str = env!("VERGEN_SEMVER");
 
 /// Contains build information about the library, taken from build environment.
 pub mod build {
@@ -35,12 +38,12 @@ pub mod build {
 }
 
 /// Crate `version` field from library's `Cargo.toml`
-pub const CRATE_VERSION: &'static str = env!("CARGO_PKG_VERSION");
+pub const CRATE_VERSION: &str = env!("CARGO_PKG_VERSION");
 /// Crate `authors` field from library's `Cargo.toml`
-pub const CRATE_AUTHORS: &'static str = env!("CARGO_PKG_AUTHORS");
+pub const CRATE_AUTHORS: &str = env!("CARGO_PKG_AUTHORS");
 /// Crate `package` field from library's `Cargo.toml`
-pub const CRATE_NAME: &'static str = env!("CARGO_PKG_NAME");
+pub const CRATE_NAME: &str = env!("CARGO_PKG_NAME");
 /// Crate `homepage` field from library's `Cargo.toml`
-pub const CRATE_HOMEPAGE: &'static str = env!("CARGO_PKG_HOMEPAGE");
+pub const CRATE_HOMEPAGE: &str = env!("CARGO_PKG_HOMEPAGE");
 /// Crate `description` field from library's `Cargo.toml`
-pub const CRATE_DESCRIPTION: &'static str = env!("CARGO_PKG_DESCRIPTION");
+pub const CRATE_DESCRIPTION: &str = env!("CARGO_PKG_DESCRIPTION");

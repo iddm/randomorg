@@ -1,5 +1,5 @@
-use serde::*;
 use methods::Method;
+use serde::*;
 
 use std::collections::BTreeSet;
 

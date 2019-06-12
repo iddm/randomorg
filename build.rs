@@ -30,8 +30,9 @@ pub fn profile() -> &'static str {{\n\t\"{}\"\n}}\n",
 }
 
 fn main() {
-    use vergen::{vergen, OutputFns};
-    let flags = OutputFns::all();
-    assert!(vergen(flags).is_ok());
+    use vergen::{generate_cargo_keys, ConstantsFlags};
+    let mut flags = ConstantsFlags::all();
+    flags.toggle(ConstantsFlags::SEMVER_FROM_CARGO_PKG);
+    generate_cargo_keys(ConstantsFlags::all()).expect("Unable to generate the cargo keys!");
     create_build_info();
 }

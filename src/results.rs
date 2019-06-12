@@ -1,6 +1,6 @@
 use chrono;
-use model::{ApiKeyStatus, Response};
 use date_de;
+use model::{ApiKeyStatus, Response};
 
 /// A random.org response of `getUsage` method.
 #[derive(Debug, Clone, Deserialize)]
@@ -104,8 +104,8 @@ mod parse_tests {
 
     #[test]
     fn test_get_usage_response_parse() {
-        use {ApiKeyStatus, GetUsageResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {ApiKeyStatus, GetUsageResult, RequestId, Response};
 
         let s = r#"
         {
@@ -141,8 +141,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_integers_response_parse() {
-        use {GenerateIntegersResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateIntegersResult, RequestId, Response};
 
         let s = r#"
         {
@@ -182,8 +182,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_decimal_fractions_response_parse() {
-        use {GenerateDecimalFractionsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateDecimalFractionsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -230,8 +230,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_gaussians_response_parse() {
-        use {GenerateGaussiansResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateGaussiansResult, RequestId, Response};
 
         let s = r#"
         {
@@ -274,8 +274,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_strings_response_parse() {
-        use {GenerateStringsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateStringsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -328,8 +328,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_uuids_response_parse() {
-        use {GenerateUUIDsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateUUIDsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -372,8 +372,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_blobs_response_parse() {
-        use {GenerateBlobsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateBlobsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -414,8 +414,8 @@ mod parse_tests {
 
     #[test]
     fn test_incorrect_and_correct_dates_parse() {
-        use {GenerateBlobsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
+        use {GenerateBlobsResult, RequestId, Response};
 
         let correct = r#"
         {

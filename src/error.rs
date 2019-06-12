@@ -1,8 +1,8 @@
-use std::io::Error as IoError;
-use std::error::Error as StdError;
-use std::fmt::Display;
 use reqwest::Error as ReqwestError;
 use serde_json::Error as JsonError;
+use std::error::Error as StdError;
+use std::fmt::Display;
+use std::io::Error as IoError;
 
 /// Random.org API `Result` alias type.
 pub type Result<T> = ::std::result::Result<T, Error>;
@@ -55,7 +55,7 @@ impl From<::reqwest::Response> for Error {
             error: ResponseError,
         }
 
-        let status = response.status().clone();
+        let status = response.status();
         let mut body = String::new();
         let _ = response.read_to_string(&mut body);
         if !status.is_success() {

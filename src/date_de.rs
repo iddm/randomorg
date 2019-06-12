@@ -3,8 +3,8 @@
 
 use std::fmt;
 
-use serde::de;
 use chrono::NaiveDateTime;
+use serde::de;
 
 struct NaiveDateTimeFromMyFormatVisitor;
 

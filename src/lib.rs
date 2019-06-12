@@ -34,68 +34,49 @@ extern crate serde;
 extern crate serde_derive;
 extern crate serde_json;
 
-use reqwest::header::ContentType;
-
 mod date_de;
-mod model;
-mod methods;
 mod error;
+mod methods;
+mod model;
 mod params;
+mod request_builders;
 mod requests;
 mod results;
-mod request_builders;
 pub mod version;
 
 use methods::Method;
-use requests::{EmptyRequest, GenerateBlobsRequest, GenerateDecimalFractionsRequest,
-               GenerateGaussiansRequest, GenerateIntegersRequest, GenerateStringsRequest,
-               GenerateUUIDsRequest};
-pub use request_builders::{RequestBlobs, RequestDecimalFractions, RequestGaussians,
-                           RequestIntegers, RequestStrings, RequestUUIDs};
 pub use model::{AllowedCharacters, ApiKey, ApiKeyStatus, Request, RequestId, Response};
-pub use results::{GenerateBlobsResult, GenerateDecimalFractionsResult, GenerateGaussiansResult,
-                  GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult,
-                  GetUsageResult, RandomData, RandomResult};
+pub use request_builders::{
+    RequestBlobs, RequestDecimalFractions, RequestGaussians, RequestIntegers, RequestStrings,
+    RequestUUIDs,
+};
+use requests::{
+    EmptyRequest, GenerateBlobsRequest, GenerateDecimalFractionsRequest, GenerateGaussiansRequest,
+    GenerateIntegersRequest, GenerateStringsRequest, GenerateUUIDsRequest,
+};
+pub use results::{
+    GenerateBlobsResult, GenerateDecimalFractionsResult, GenerateGaussiansResult,
+    GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult, GetUsageResult, RandomData,
+    RandomResult,
+};
 
 pub use error::{Error, ErrorCode, ResponseError, Result};
 
-const API_INVOKE: &'static str = "https://api.random.org/json-rpc/2/invoke";
+const API_INVOKE: &str = "https://api.random.org/json-rpc/2/invoke";
 
-fn retry(mut builder: reqwest::RequestBuilder) -> Result<reqwest::Response> {
-    let builder = &mut builder;
-    let mut f2 = || check_status(builder.send());
-    // retry on a ConnectionAborted, which occurs if it's been a while since the last request
-    match f2() {
-        Err(_) => f2(),
-        other => other,
-    }
-}
-
-fn check_status(response: reqwest::Result<reqwest::Response>) -> Result<reqwest::Response> {
-    let response = response?;
-    if !response.status().is_success() {
-        return Err(Error::from(response));
-    }
-    Ok(response)
-}
-
-/// Macro only for internal use with the `Random` object (relies on it's fields).
+/// Macro only for internal use with the `Random` object (relies on its fields).
 /// Performs a request.
 macro_rules! make_request {
-    ($api:ident, $body:expr) => {
-        {
-            let mut request_builder = $api.client.post(API_INVOKE);
-            request_builder.body($body).header(ContentType::json());
-            retry(request_builder)
-        }
-    };
+    ($api:ident, $body:expr) => {{
+        $api.client.post(API_INVOKE).json($body).send()
+    }};
 }
 
 /// Macro only for internal use with the `Random` object (relies on it's fields)
 /// Parses a service data from the request's response.
 macro_rules! request {
     ($api:ident, $request:ident) => {
-        Ok(make_request!($api, serde_json::to_string(&$request)?)?.json()?)
+        Ok(make_request!($api, &serde_json::to_string(&$request)?)?.json()?)
     };
 }
 
@@ -110,7 +91,7 @@ impl Random {
     ///
     /// # Usage
     ///
-    /// ```rust,no_run
+    /// ```rust
     /// extern crate randomorg;
     ///
     /// fn main() {

@@ -8,6 +8,7 @@ const API_JSON_RPC_VERSION: &str = "2.0";
 /// Used in `getUsage` method.
 pub type EmptyRequest = Request<ApiKeyParams>;
 impl EmptyRequest {
+    /// Create an empty request.
     pub fn new(method: Method, api_key: ApiKey) -> EmptyRequest {
         EmptyRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
@@ -21,6 +22,7 @@ impl EmptyRequest {
 /// A request for `generateIntegers` method.
 pub type GenerateIntegersRequest = Request<GenerateIntegersParams>;
 impl GenerateIntegersRequest {
+    /// Create a request for integers generation.
     pub fn new(
         api_key: ApiKey,
         min: i32,
@@ -46,6 +48,7 @@ impl GenerateIntegersRequest {
 /// A request for `generateDecimalFractions` method.
 pub type GenerateDecimalFractionsRequest = Request<GenerateDecimalFractionsParams>;
 impl GenerateDecimalFractionsRequest {
+    /// Create a request for decimal fractions generation.
     pub fn new(api_key: ApiKey, limit: u16, decimal_places: u8) -> GenerateDecimalFractionsRequest {
         GenerateDecimalFractionsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
@@ -63,6 +66,7 @@ impl GenerateDecimalFractionsRequest {
 /// A request for `generateGaussians` method.
 pub type GenerateGaussiansRequest = Request<GenerateGaussiansParams>;
 impl GenerateGaussiansRequest {
+    /// Create a request for gaussians generation.
     pub fn new(
         api_key: ApiKey,
         limit: u16,
@@ -88,6 +92,7 @@ impl GenerateGaussiansRequest {
 /// A request for `generateStrings` method.
 pub type GenerateStringsRequest = Request<GenerateStringsParams>;
 impl GenerateStringsRequest {
+    /// Create a request for strings generation.
     pub fn new(
         api_key: ApiKey,
         limit: u16,
@@ -111,6 +116,7 @@ impl GenerateStringsRequest {
 /// A request for `generateUUIDs` method.
 pub type GenerateUUIDsRequest = Request<GenerateUUIDsParams>;
 impl GenerateUUIDsRequest {
+    /// Create a request for strings UUIDs generation.
     pub fn new(api_key: ApiKey, limit: u16) -> GenerateUUIDsRequest {
         GenerateUUIDsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),
@@ -124,6 +130,7 @@ impl GenerateUUIDsRequest {
 /// A request for `generateBlobs` method.
 pub type GenerateBlobsRequest = Request<GenerateBlobsParams>;
 impl GenerateBlobsRequest {
+    /// Create a request for blobs generation.
     pub fn new(api_key: ApiKey, limit: u16, size: u32) -> GenerateBlobsRequest {
         GenerateBlobsRequest {
             json_rpc: API_JSON_RPC_VERSION.to_owned(),

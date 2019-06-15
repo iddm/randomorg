@@ -8,14 +8,14 @@ use std::io::Error as IoError;
 pub type Result<T> = ::std::result::Result<T, Error>;
 
 /// Random.org error code.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct ErrorCode(pub u64);
 
 /// Random.org response error definition.
 ///
 /// If an error occurred, this member contains a service-specific error object with details
 /// about the error. If no error occurred, this member is not included in the response.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct ResponseError {
     /// A numeric error code that uniquely identifies the error type.
     pub code: ErrorCode,
@@ -50,7 +50,7 @@ impl From<::reqwest::Response> for Error {
     fn from(mut response: ::reqwest::Response) -> Error {
         use std::io::Read;
 
-        #[derive(Deserialize)]
+        #[derive(serde::Deserialize)]
         pub struct ErrorObject {
             error: ResponseError,
         }

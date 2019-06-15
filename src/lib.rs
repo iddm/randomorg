@@ -27,11 +27,11 @@
 //! library will send multiple requests simultaneously with the same `request_id` field and the
 //! **random.org** service will refuse to process them.
 
+#![warn(missing_docs)]
+
 extern crate chrono;
 extern crate reqwest;
 extern crate serde;
-#[macro_use]
-extern crate serde_derive;
 extern crate serde_json;
 
 mod date_de;

@@ -1,6 +1,6 @@
 [package]
 name = "randomorg"
-version = "0.5.0"
+version = "1.0.0"
 authors = ["Victor Polevoy <fx@thefx.co>"]
 description = """
 A random.org client library. The randomness comes from atmospheric noise, which \
@@ -19,8 +19,7 @@ travis-ci = { repository = "vityafx/randomorg" }
 
 [dependencies]
 reqwest = "0.9"
-serde = "1"
-serde_derive = "1"
+serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 chrono = { version = "0.4", features = ["serde"] }
 

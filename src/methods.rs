@@ -1,4 +1,4 @@
-#[derive(Debug, Copy, Clone, Serialize, Deserialize)]
+#[derive(Debug, Copy, Clone, serde::Serialize, serde::Deserialize)]
 pub enum Method {
     /// This method generates true random integers within a user-defined range.
     #[serde(rename = "generateIntegers")]

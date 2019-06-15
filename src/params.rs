@@ -1,7 +1,7 @@
 use model::ApiKey;
 
 /// A random.org api key params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct ApiKeyParams {
     /// An api key
     #[serde(rename = "apiKey")]
@@ -9,7 +9,7 @@ pub struct ApiKeyParams {
 }
 
 /// A random.org `generateIntegers` method params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GenerateIntegersParams {
     /// An api key
     #[serde(rename = "apiKey")]
@@ -38,7 +38,7 @@ pub struct GenerateIntegersParams {
 }
 
 /// A random.org `generateDecimalFractions` method params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GenerateDecimalFractionsParams {
     /// An api key
     #[serde(rename = "apiKey")]
@@ -52,7 +52,7 @@ pub struct GenerateDecimalFractionsParams {
 }
 
 /// A random.org `generateGaussians` method params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GenerateGaussiansParams {
     /// An api key
     #[serde(rename = "apiKey")]
@@ -71,7 +71,7 @@ pub struct GenerateGaussiansParams {
 }
 
 /// A random.org `generateStrings` method params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GenerateStringsParams {
     /// An api key
     #[serde(rename = "apiKey")]
@@ -88,7 +88,7 @@ pub struct GenerateStringsParams {
 }
 
 /// A random.org `generateUUIDs` method params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GenerateUUIDsParams {
     /// An api key
     #[serde(rename = "apiKey")]
@@ -99,7 +99,7 @@ pub struct GenerateUUIDsParams {
 }
 
 /// A random.org `generateBlobs` method params
-#[derive(Debug, Clone, Serialize)]
+#[derive(Debug, Clone, serde::Serialize)]
 pub struct GenerateBlobsParams {
     /// An api key
     #[serde(rename = "apiKey")]

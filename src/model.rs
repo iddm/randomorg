@@ -15,8 +15,11 @@ pub struct ApiKey(pub String);
 #[derive(Debug, Clone, Eq, Ord, PartialEq, PartialOrd, Serialize, Deserialize)]
 #[serde(rename_all = "lowercase")]
 pub enum ApiKeyStatus {
+    /// The key has been revoked.
     Stopped,
+    /// The key has been paused, means it is not working, but not revoked.
     Paused,
+    /// The key is valid by all means.
     Running,
 }
 

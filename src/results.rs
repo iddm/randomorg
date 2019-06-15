@@ -3,7 +3,7 @@ use date_de;
 use model::{ApiKeyStatus, Response};
 
 /// A random.org response of `getUsage` method.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct GetUsageResult {
     /// A string indicating the API key's current status, which may be stopped, paused or running.
     /// An API key must be running for it to be able to serve requests.
@@ -29,7 +29,7 @@ pub struct GetUsageResult {
 }
 
 /// A random.org's produced random data (from `generateIntegers` method)
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct RandomData<T> {
     /// An array containing the sequence of numbers requested.
     pub data: Vec<T>,
@@ -40,7 +40,7 @@ pub struct RandomData<T> {
 }
 
 /// A random.org response with random data.
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, serde::Deserialize)]
 pub struct RandomResult<RandomDataType> {
     /// This object encapsulates the random numbers and associated data. It contains the following
     /// properties.

@@ -3,6 +3,7 @@ use serde_json::Error as JsonError;
 use std::error::Error as StdError;
 use std::fmt::Display;
 use std::io::Error as IoError;
+use std::num::ParseIntError;
 
 /// Random.org API `Result` alias type.
 pub type Result<T> = ::std::result::Result<T, Error>;
@@ -38,12 +39,20 @@ pub enum Error {
     Json(JsonError),
     /// A `std::io` module error
     Io(IoError),
+    /// A parse number error
+    ParseIntError(ParseIntError),
     /// A error common toornament service error
     RandomOrg(::reqwest::StatusCode, ResponseError),
     /// A generic non-success response from the REST API
     Status(::reqwest::StatusCode, String),
     /// A rest-api error
     Rest(&'static str),
+}
+
+impl From<ParseIntError> for Error {
+    fn from(e: ParseIntError) -> Error {
+        Error::ParseIntError(e)
+    }
 }
 
 impl From<::reqwest::Response> for Error {
@@ -102,6 +111,7 @@ impl StdError for Error {
             Error::Reqwest(ref inner) => inner.description(),
             Error::Json(ref inner) => inner.description(),
             Error::Io(ref inner) => inner.description(),
+            Error::ParseIntError(ref inner) => inner.description(),
             Error::Rest(msg) => msg,
             Error::RandomOrg(status, _) | Error::Status(status, _) => status
                 .canonical_reason()
@@ -114,6 +124,7 @@ impl StdError for Error {
             Error::Reqwest(ref inner) => Some(inner),
             Error::Json(ref inner) => Some(inner),
             Error::Io(ref inner) => Some(inner),
+            Error::ParseIntError(ref inner) => Some(inner),
             _ => None,
         }
     }

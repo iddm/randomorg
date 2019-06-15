@@ -34,6 +34,8 @@ mod error;
 mod methods;
 mod model;
 mod params;
+#[cfg(feature = "rng")]
+pub mod rand;
 mod request_builders;
 mod requests;
 mod results;
@@ -76,6 +78,7 @@ macro_rules! request {
 }
 
 /// A random.org api client.
+#[derive(Debug, Clone)]
 pub struct Random {
     client: reqwest::Client,
     api_key: ApiKey,

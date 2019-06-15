@@ -35,7 +35,7 @@ for better random generation UX.
 ## Usage
 Start by creating `Random` instance and perform needed operations after.
 
-```rust,no_run
+```rust
 extern crate randomorg;
 
 fn main() {
@@ -51,7 +51,7 @@ fn main() {
 
 With the `rand` feature you can also use it that way:
 
-```rust,no_run
+```rust
 extern crate randomorg;
 
 fn main() {

@@ -1,6 +1,6 @@
+use crate::date_de;
+use crate::model::{ApiKeyStatus, Response};
 use chrono;
-use date_de;
-use model::{ApiKeyStatus, Response};
 
 /// A random.org response of `getUsage` method.
 #[derive(Debug, Clone, serde::Deserialize)]
@@ -104,8 +104,8 @@ mod parse_tests {
 
     #[test]
     fn test_get_usage_response_parse() {
+        use crate::{ApiKeyStatus, GetUsageResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {ApiKeyStatus, GetUsageResult, RequestId, Response};
 
         let s = r#"
         {
@@ -141,8 +141,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_integers_response_parse() {
+        use crate::{GenerateIntegersResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateIntegersResult, RequestId, Response};
 
         let s = r#"
         {
@@ -182,8 +182,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_decimal_fractions_response_parse() {
+        use crate::{GenerateDecimalFractionsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateDecimalFractionsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -230,8 +230,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_gaussians_response_parse() {
+        use crate::{GenerateGaussiansResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateGaussiansResult, RequestId, Response};
 
         let s = r#"
         {
@@ -274,8 +274,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_strings_response_parse() {
+        use crate::{GenerateStringsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateStringsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -328,8 +328,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_uuids_response_parse() {
+        use crate::{GenerateUUIDsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateUUIDsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -372,8 +372,8 @@ mod parse_tests {
 
     #[test]
     fn test_generate_blobs_response_parse() {
+        use crate::{GenerateBlobsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateBlobsResult, RequestId, Response};
 
         let s = r#"
         {
@@ -414,8 +414,8 @@ mod parse_tests {
 
     #[test]
     fn test_incorrect_and_correct_dates_parse() {
+        use crate::{GenerateBlobsResult, RequestId, Response};
         use chrono::{Datelike, Timelike};
-        use {GenerateBlobsResult, RequestId, Response};
 
         let correct = r#"
         {

@@ -29,11 +29,6 @@
 
 #![warn(missing_docs)]
 
-extern crate chrono;
-extern crate reqwest;
-extern crate serde;
-extern crate serde_json;
-
 mod date_de;
 mod error;
 mod methods;
@@ -429,6 +424,6 @@ mod tests {
 
     #[test]
     fn test_sync_and_send() {
-        assert_sync_and_send::<::Random>();
+        assert_sync_and_send::<crate::Random>();
     }
 }

@@ -1,4 +1,4 @@
-use methods::Method;
+use crate::methods::Method;
 use serde::*;
 
 use std::collections::BTreeSet;

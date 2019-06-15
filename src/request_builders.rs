@@ -1,4 +1,4 @@
-use {
+use crate::{
     AllowedCharacters, GenerateBlobsResult, GenerateDecimalFractionsResult,
     GenerateGaussiansResult, GenerateIntegersResult, GenerateStringsResult, GenerateUUIDsResult,
     Random, Response, Result,

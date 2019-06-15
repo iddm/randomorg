@@ -1,6 +1,6 @@
-use methods::Method;
-use model::*;
-use params::*;
+use crate::methods::Method;
+use crate::model::*;
+use crate::params::*;
 
 const API_JSON_RPC_VERSION: &str = "2.0";
 

@@ -1,4 +1,4 @@
-use model::ApiKey;
+use crate::model::ApiKey;
 
 /// A random.org api key params
 #[derive(Debug, Clone, serde::Serialize)]

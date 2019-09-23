@@ -27,7 +27,10 @@
 //! library will send multiple requests simultaneously with the same `request_id` field and the
 //! **random.org** service will refuse to process them.
 
-#![warn(missing_docs)]
+#![deny(clippy::all)]
+#![deny(clippy::pedantic)]
+#![deny(missing_docs)]
+#![deny(warnings)]
 
 mod date_de;
 mod error;

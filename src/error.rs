@@ -119,7 +119,7 @@ impl StdError for Error {
         }
     }
 
-    fn cause(&self) -> Option<&StdError> {
+    fn cause(&self) -> Option<&dyn StdError> {
         match *self {
             Error::Reqwest(ref inner) => Some(inner),
             Error::Json(ref inner) => Some(inner),

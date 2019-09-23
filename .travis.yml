@@ -24,6 +24,7 @@ script:
   - cargo fmt --verbose --all -- --check
   - cargo clippy
   - cargo test --verbose $FEATURES -- --nocapture
+  - cargo run --example generate_integers
 addons:
   apt:
     packages:

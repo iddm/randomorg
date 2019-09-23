@@ -76,7 +76,7 @@ macro_rules! make_request {
 /// Parses a service data from the request's response.
 macro_rules! request {
     ($api:ident, $request:ident) => {
-        Ok(make_request!($api, &serde_json::to_string(&$request)?)?.json()?)
+        Ok(make_request!($api, &$request)?.json()?)
     };
 }
 

@@ -55,8 +55,8 @@ impl From<ParseIntError> for Error {
     }
 }
 
-impl From<::reqwest::Response> for Error {
-    fn from(mut response: ::reqwest::Response) -> Error {
+impl From<::reqwest::blocking::Response> for Error {
+    fn from(mut response: ::reqwest::blocking::Response) -> Error {
         use std::io::Read;
 
         #[derive(serde::Deserialize)]

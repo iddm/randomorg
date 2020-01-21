@@ -1,6 +1,6 @@
 [package]
 name = "randomorg"
-version = "1.0.1"
+version = "1.0.2"
 authors = ["Victor Polevoy <fx@thefx.co>"]
 description = """
 A random.org client library. The randomness comes from atmospheric noise, which \

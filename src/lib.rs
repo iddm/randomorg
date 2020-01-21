@@ -83,7 +83,7 @@ macro_rules! request {
 /// A random.org api client.
 #[derive(Debug, Clone)]
 pub struct Random {
-    client: reqwest::Client,
+    client: reqwest::blocking::Client,
     api_key: ApiKey,
 }
 
@@ -102,7 +102,7 @@ impl Random {
     /// ```
     pub fn new<S: Into<String>>(api_key: S) -> Random {
         Random {
-            client: reqwest::Client::new(),
+            client: reqwest::blocking::Client::new(),
             api_key: ApiKey(api_key.into()),
         }
     }

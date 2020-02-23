@@ -100,26 +100,13 @@ impl Display for Error {
             Error::Reqwest(ref inner) => inner.fmt(f),
             Error::Json(ref inner) => inner.fmt(f),
             Error::Io(ref inner) => inner.fmt(f),
-            _ => f.write_str(self.description()),
+            _ => f.write_str(&self.to_string()),
         }
     }
 }
 
 impl StdError for Error {
-    fn description(&self) -> &str {
-        match *self {
-            Error::Reqwest(ref inner) => inner.description(),
-            Error::Json(ref inner) => inner.description(),
-            Error::Io(ref inner) => inner.description(),
-            Error::ParseIntError(ref inner) => inner.description(),
-            Error::Rest(msg) => msg,
-            Error::RandomOrg(status, _) | Error::Status(status, _) => status
-                .canonical_reason()
-                .unwrap_or("Unknown bad HTTP status"),
-        }
-    }
-
-    fn cause(&self) -> Option<&dyn StdError> {
+    fn source(&self) -> Option<&(dyn StdError + 'static)> {
         match *self {
             Error::Reqwest(ref inner) => Some(inner),
             Error::Json(ref inner) => Some(inner),

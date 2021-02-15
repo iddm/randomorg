@@ -27,7 +27,7 @@ rand_core = { optional = true, version = "0.6", features = ["std"] }
 log = { optional = true, version = "0.4" }
 
 [build-dependencies]
-vergen = "3"
+vergen = "4"
 
 [features]
 default = []

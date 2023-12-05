@@ -1,4 +1,4 @@
-extern crate vergen;
+use vergen;
 
 fn create_build_info() {
     use std::env;

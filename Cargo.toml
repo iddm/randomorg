@@ -6,7 +6,7 @@ description = """
 A random.org client library. The randomness comes from atmospheric noise, which \
 for many purposes is better than the pseudo-random number algorithms typically used in computer \
 programs."""
-repository = "https://github.com/vityafx/randomorg"
+repository = "https://github.com/iddm/randomorg"
 documentation = "https://docs.rs/randomorg/"
 readme = "README.md"
 license = "MIT"
@@ -14,9 +14,6 @@ keywords = ["random", "api", "prng", "generator", "rand"]
 categories = ["api-bindings", "cryptography"]
 build = "build.rs"
 edition = "2018"
-
-[badges]
-travis-ci = { repository = "vityafx/randomorg" }
 
 [dependencies]
 reqwest = { version = "0.11", features = ["json", "blocking"] }

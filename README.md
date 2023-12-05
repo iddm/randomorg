@@ -1,5 +1,5 @@
 # random.org
-[![Build status](https://travis-ci.org/vityafx/randomorg.svg?branch=master)](https://travis-ci.org/vityafx/randomorg)
+[![Build status](https://travis-ci.org/iddm/randomorg.svg?branch=master)](https://travis-ci.org/iddm/randomorg)
 [![Crates](https://img.shields.io/crates/v/randomorg.svg)](https://crates.io/crates/randomorg)
 [![Docs](https://docs.rs/randomorg/badge.svg)](https://docs.rs/randomorg)
 [![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
@@ -68,4 +68,4 @@ fn main() {
 ## License
 
 This project is
-[licensed under the MIT license](https://github.com/vityafx/randomorg/blob/master/LICENSE).
+[licensed under the MIT license](https://github.com/iddm/randomorg/blob/master/LICENSE).
